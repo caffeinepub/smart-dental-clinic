@@ -1,0 +1,185 @@
+import { Facebook, Instagram, Twitter, Youtube } from "lucide-react";
+
+const quickLinks = [
+  { label: "Home", href: "#home" },
+  { label: "About", href: "#about" },
+  { label: "Services", href: "#services" },
+  { label: "Why Choose Us", href: "#why-us" },
+  { label: "Book Appointment", href: "#book" },
+  { label: "Contact", href: "#contact" },
+];
+
+const serviceLinks = [
+  "Root Canals",
+  "Teeth Whitening",
+  "Dental Implants",
+  "Teeth Cleaning",
+  "Cosmetic Procedures",
+  "Emergency Care",
+  "Paediatrics",
+  "Veneers & Crowns",
+];
+
+const scrollTo = (href: string) => {
+  document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
+};
+
+export function Footer() {
+  const year = new Date().getFullYear();
+
+  return (
+    <footer className="bg-footer text-white pt-16 pb-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 pb-12 border-b border-white/10">
+          {/* Brand */}
+          <div>
+            <div className="flex items-center gap-2 mb-5">
+              <span className="text-3xl">🦷</span>
+              <div>
+                <div className="font-display font-bold text-xl text-white">
+                  SMart Dental
+                </div>
+                <div className="text-xs text-white/50">Root Canal Clinic</div>
+              </div>
+            </div>
+            <p className="text-white/60 text-sm leading-relaxed mb-6">
+              Expert dental care with a gentle touch. Your smile is our mission.
+            </p>
+            <div className="flex gap-3">
+              {[
+                {
+                  icon: Facebook,
+                  label: "Facebook",
+                  href: "https://facebook.com",
+                },
+                {
+                  icon: Instagram,
+                  label: "Instagram",
+                  href: "https://instagram.com",
+                },
+                {
+                  icon: Twitter,
+                  label: "Twitter",
+                  href: "https://twitter.com",
+                },
+                {
+                  icon: Youtube,
+                  label: "YouTube",
+                  href: "https://youtube.com",
+                },
+              ].map(({ icon: Icon, label, href }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="w-9 h-9 rounded-lg bg-white/10 hover:bg-primary/80 flex items-center justify-center transition-colors duration-200"
+                  data-ocid="footer.link"
+                >
+                  <Icon className="h-4 w-4" />
+                </a>
+              ))}
+            </div>
+          </div>
+
+          {/* Quick Links */}
+          <div>
+            <h3 className="font-semibold text-white text-base mb-5">
+              Quick Links
+            </h3>
+            <ul className="space-y-2.5">
+              {quickLinks.map((link) => (
+                <li key={link.href}>
+                  <button
+                    type="button"
+                    onClick={() => scrollTo(link.href)}
+                    className="text-white/60 hover:text-white text-sm transition-colors duration-200"
+                    data-ocid="footer.link"
+                  >
+                    {link.label}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Services */}
+          <div>
+            <h3 className="font-semibold text-white text-base mb-5">
+              Our Services
+            </h3>
+            <ul className="space-y-2.5">
+              {serviceLinks.map((s) => (
+                <li key={s}>
+                  <button
+                    type="button"
+                    onClick={() => scrollTo("#services")}
+                    className="text-white/60 hover:text-white text-sm transition-colors duration-200 text-left"
+                    data-ocid="footer.link"
+                  >
+                    {s}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Contact */}
+          <div>
+            <h3 className="font-semibold text-white text-base mb-5">
+              Contact Info
+            </h3>
+            <div className="space-y-4 text-sm">
+              <div className="flex items-start gap-2 text-white/70">
+                <span className="mt-0.5">📍</span>
+                <span>SMart Dental Clinic, Hyderabad, Telangana, India</span>
+              </div>
+              <div className="flex items-center gap-2 text-white/70">
+                <span>📞</span>
+                <a
+                  href="tel:+918790021647"
+                  className="hover:text-white transition-colors"
+                  data-ocid="footer.link"
+                >
+                  +91 8790021647
+                </a>
+              </div>
+              <div className="flex items-start gap-2 text-white/70">
+                <span>🕐</span>
+                <span>Mon–Sat: 9:00 AM – 8:00 PM</span>
+              </div>
+              <a
+                href="https://wa.me/918790021647"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-[#25D366] hover:opacity-90 transition-opacity text-white text-xs font-semibold px-4 py-2 rounded-full mt-2"
+                data-ocid="footer.link"
+              >
+                💬 WhatsApp Us
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom bar */}
+        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-white/40 text-sm">
+            © {year} SMart Dental Clinic. All Rights Reserved.
+          </p>
+          <p className="text-white/30 text-xs">
+            Built with ❤️ using{" "}
+            <a
+              href={`https://caffeine.ai?utm_source=caffeine-footer&utm_medium=referral&utm_content=${encodeURIComponent(window.location.hostname)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white/60 transition-colors"
+            >
+              caffeine.ai
+            </a>
+          </p>
+        </div>
+      </div>
+    </footer>
+  );
+}

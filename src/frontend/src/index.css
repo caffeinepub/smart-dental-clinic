@@ -1,0 +1,182 @@
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Bricolage+Grotesque:wght@400;600;700;800&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --radius: 0.75rem;
+
+    /* Dental clinic palette */
+    --background: 1 0 0;
+    --foreground: 0.22 0.008 250;
+    --card: 1 0 0;
+    --card-foreground: 0.22 0.008 250;
+    --popover: 1 0 0;
+    --popover-foreground: 0.22 0.008 250;
+
+    /* Primary: #2E86C1 soft blue */
+    --primary: 0.55 0.12 230;
+    --primary-foreground: 1 0 0;
+
+    /* Secondary: mint green #48C9B0 */
+    --secondary: 0.75 0.12 175;
+    --secondary-foreground: 1 0 0;
+
+    --muted: 0.97 0.004 220;
+    --muted-foreground: 0.52 0.018 240;
+
+    /* Accent: mint green */
+    --accent: 0.75 0.12 175;
+    --accent-foreground: 1 0 0;
+
+    --destructive: 0.577 0.245 27.325;
+    --destructive-foreground: 0.985 0 0;
+
+    --border: 0.92 0.006 220;
+    --input: 0.92 0.006 220;
+    --ring: 0.55 0.12 230;
+
+    /* Section background */
+    --section-alt: 0.97 0.004 220;
+
+    /* Footer dark blue #1a5276 */
+    --footer-bg: 0.35 0.09 235;
+
+    /* Stars gold #F4C150 */
+    --star: 0.82 0.15 75;
+
+    --chart-1: 0.55 0.12 230;
+    --chart-2: 0.75 0.12 175;
+    --chart-3: 0.82 0.15 75;
+    --chart-4: 0.646 0.222 41.116;
+    --chart-5: 0.769 0.188 70.08;
+
+    --sidebar: 0.985 0 0;
+    --sidebar-foreground: 0.22 0.008 250;
+    --sidebar-primary: 0.55 0.12 230;
+    --sidebar-primary-foreground: 1 0 0;
+    --sidebar-accent: 0.97 0.004 220;
+    --sidebar-accent-foreground: 0.22 0.008 250;
+    --sidebar-border: 0.92 0.006 220;
+    --sidebar-ring: 0.55 0.12 230;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Plus Jakarta Sans", sans-serif;
+  }
+}
+
+@layer utilities {
+  .section-alt {
+    background-color: oklch(var(--section-alt));
+  }
+
+  .text-primary-blue {
+    color: oklch(var(--primary));
+  }
+
+  .text-mint {
+    color: oklch(var(--secondary));
+  }
+
+  .bg-primary-blue {
+    background-color: oklch(var(--primary));
+  }
+
+  .bg-mint {
+    background-color: oklch(var(--secondary));
+  }
+
+  .bg-footer {
+    background-color: oklch(var(--footer-bg));
+  }
+
+  .text-star {
+    color: oklch(var(--star));
+  }
+
+  .animate-fade-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .animate-fade-up.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .animate-fade-in {
+    opacity: 0;
+    transition: opacity 0.7s ease;
+  }
+
+  .animate-fade-in.in-view {
+    opacity: 1;
+  }
+
+  @keyframes pulse-ring {
+    0% {
+      box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5);
+    }
+    70% {
+      box-shadow: 0 0 0 14px rgba(37, 211, 102, 0);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+    }
+  }
+
+  .whatsapp-pulse {
+    animation: pulse-ring 2s ease-out infinite;
+  }
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-8px);
+    }
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .card-hover {
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .card-hover:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(46, 134, 193, 0.15);
+  }
+
+  .service-card-hover {
+    transition: all 0.25s ease;
+  }
+
+  .service-card-hover:hover {
+    border-color: oklch(var(--secondary));
+    box-shadow: 0 8px 24px rgba(72, 201, 176, 0.2);
+    transform: translateY(-3px);
+  }
+
+  .service-card-hover:hover .service-icon {
+    background-color: oklch(var(--secondary));
+    color: white;
+  }
+}
