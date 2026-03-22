@@ -1,35 +1,27 @@
-# SMart Dental (Root Canal Clinic)
+# SMart Dental Clinic
 
 ## Current State
-New project. No existing code.
+Full dental clinic website with hero, about, services, why choose us, booking form, testimonials, contact, and footer sections. Backend stores appointments and contact form submissions. No authentication or admin dashboard exists.
 
 ## Requested Changes (Diff)
 
 ### Add
-- Full dental clinic website with 8 sections
-- Appointment booking form (Name, Phone, Service, Date) stored in backend
-- Sticky navigation bar with smooth scroll
-- WhatsApp floating chat button
-- All 19 dental services listed in grid layout
-- Testimonials section with star ratings
-- Contact section with phone number (+91 8790021647) and address
-- Footer with quick links, services, contact info, social icons
+- Internet Identity login button in the Navbar (visible to all users)
+- Admin dashboard page accessible only after login via Internet Identity
+- Admin dashboard shows all submitted appointments and contact form messages
+- Role-based access: only the first user to log in (or a designated principal) gets admin access
+- Protect getAllAppointments and getAllContactForms to only be callable by admins
 
 ### Modify
-N/A
+- Navbar: add Login/Logout button using Internet Identity
+- App.tsx: add routing so /admin shows the admin dashboard when logged in
 
 ### Remove
-N/A
+- Nothing removed
 
 ## Implementation Plan
-1. Backend: Store appointment bookings (name, phone, service, date, timestamp)
-2. Frontend sections:
-   - Hero: headline, subtext, CTA buttons (Book Appointment, Call Now)
-   - About Us: clinic intro, root canal expertise, hygiene/equipment focus
-   - Services: 19 services in responsive grid with icons
-   - Why Choose Us: 5 trust pillars with icons
-   - Online Booking: form that submits to backend
-   - Testimonials: 4-5 patient reviews with star ratings
-   - Contact: phone, address, Google Maps embed
-   - Footer: links, services list, contact, social icons
-3. Extras: sticky nav, WhatsApp button, smooth scrolling, responsive design
+1. Select `authorization` Caffeine component
+2. Regenerate Motoko backend with authorization integrated -- admin-only access to getAllAppointments and getAllContactForms
+3. Add Login/Logout button to Navbar using the auth hooks from the authorization component
+4. Create AdminDashboard component that shows appointments and contact form submissions
+5. Add route-based or state-based navigation to show AdminDashboard when logged in as admin

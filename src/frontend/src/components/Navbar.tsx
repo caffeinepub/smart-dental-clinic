@@ -1,5 +1,6 @@
+import { useAuth } from "@/components/auth";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import { LayoutDashboard, LogIn, LogOut, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const navLinks = [
@@ -11,9 +12,14 @@ const navLinks = [
   { label: "Contact", href: "#contact" },
 ];
 
-export function Navbar() {
+interface NavbarProps {
+  onOpenDashboard?: () => void;
+}
+
+export function Navbar({ onOpenDashboard }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const { isAuthenticated, isLoggingIn, login, logout } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -70,15 +76,53 @@ export function Navbar() {
           ))}
         </ul>
 
-        {/* CTA Button */}
-        <div className="hidden lg:block">
-          <Button
-            className="bg-primary-blue text-white hover:opacity-90 rounded-full px-6 shadow-blue transition-all duration-200"
-            onClick={() => handleNav("#book")}
-            data-ocid="nav.primary_button"
-          >
-            Book Appointment
-          </Button>
+        {/* Right side buttons */}
+        <div className="hidden lg:flex items-center gap-2">
+          {isAuthenticated ? (
+            <>
+              <Button
+                variant="outline"
+                size="sm"
+                className="border-[#2E86C1] text-[#2E86C1] hover:bg-blue-50 rounded-full px-4"
+                onClick={onOpenDashboard}
+                data-ocid="nav.primary_button"
+              >
+                <LayoutDashboard size={14} className="mr-1.5" />
+                Dashboard
+              </Button>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="text-red-500 hover:text-red-700 hover:bg-red-50 rounded-full px-4"
+                onClick={logout}
+                data-ocid="nav.secondary_button"
+              >
+                <LogOut size={14} className="mr-1.5" />
+                Logout
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="text-gray-500 hover:text-[#2E86C1] rounded-full px-4"
+                onClick={login}
+                disabled={isLoggingIn}
+                data-ocid="nav.secondary_button"
+              >
+                <LogIn size={14} className="mr-1.5" />
+                {isLoggingIn ? "Signing in..." : "Admin Login"}
+              </Button>
+              <Button
+                className="bg-primary-blue text-white hover:opacity-90 rounded-full px-6 shadow-blue transition-all duration-200"
+                onClick={() => handleNav("#book")}
+                data-ocid="nav.primary_button"
+              >
+                Book Appointment
+              </Button>
+            </>
+          )}
         </div>
 
         {/* Mobile menu toggle */}
@@ -107,13 +151,54 @@ export function Navbar() {
               {link.label}
             </button>
           ))}
-          <Button
-            className="bg-primary-blue text-white rounded-full mt-2"
-            onClick={() => handleNav("#book")}
-            data-ocid="nav.primary_button"
-          >
-            Book Appointment
-          </Button>
+          {isAuthenticated ? (
+            <>
+              <Button
+                variant="outline"
+                className="border-[#2E86C1] text-[#2E86C1] rounded-full mt-1"
+                onClick={() => {
+                  setMenuOpen(false);
+                  onOpenDashboard?.();
+                }}
+                data-ocid="nav.primary_button"
+              >
+                <LayoutDashboard size={14} className="mr-1.5" />
+                Admin Dashboard
+              </Button>
+              <Button
+                variant="ghost"
+                className="text-red-500 hover:bg-red-50 rounded-full"
+                onClick={() => {
+                  setMenuOpen(false);
+                  logout();
+                }}
+                data-ocid="nav.secondary_button"
+              >
+                <LogOut size={14} className="mr-1.5" />
+                Logout
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button
+                className="bg-primary-blue text-white rounded-full mt-2"
+                onClick={() => handleNav("#book")}
+                data-ocid="nav.primary_button"
+              >
+                Book Appointment
+              </Button>
+              <Button
+                variant="ghost"
+                className="text-gray-500 hover:text-[#2E86C1] rounded-full"
+                onClick={login}
+                disabled={isLoggingIn}
+                data-ocid="nav.secondary_button"
+              >
+                <LogIn size={14} className="mr-1.5" />
+                {isLoggingIn ? "Signing in..." : "Admin Login"}
+              </Button>
+            </>
+          )}
         </div>
       )}
     </header>
