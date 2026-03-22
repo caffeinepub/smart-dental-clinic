@@ -2,13 +2,18 @@ import { Button } from "@/components/ui/button";
 import { Clock, MapPin, MessageCircle, Phone } from "lucide-react";
 
 const workingHours = [
-  { day: "Sunday", hours: "10 am – 2 pm", short: true },
-  { day: "Monday", hours: "10 am – 9 pm", short: false },
-  { day: "Tuesday", hours: "10 am – 9 pm", short: false },
-  { day: "Wednesday", hours: "10 am – 9 pm", short: false },
-  { day: "Thursday", hours: "10 am – 9 pm", short: false },
-  { day: "Friday", hours: "10 am – 9 pm", short: false },
-  { day: "Saturday", hours: "10 am – 9 pm", short: false },
+  { day: "Sunday", hours: "10 am – 2 pm", note: "", short: true },
+  { day: "Monday", hours: "10 am – 9 pm", note: "", short: false },
+  { day: "Tuesday", hours: "10 am – 9 pm", note: "", short: false },
+  { day: "Wednesday", hours: "10 am – 9 pm", note: "", short: false },
+  {
+    day: "Thursday",
+    hours: "10 am – 9 pm",
+    note: "Rama Navami – Hours might differ",
+    short: false,
+  },
+  { day: "Friday", hours: "10 am – 9 pm", note: "", short: false },
+  { day: "Saturday", hours: "10 am – 9 pm", note: "", short: false },
 ];
 
 export function Contact() {
@@ -93,30 +98,36 @@ export function Contact() {
                     <h3 className="font-semibold text-foreground mb-3">
                       Working Hours
                     </h3>
-                    <div className="space-y-1.5">
-                      {workingHours.map(({ day, hours, short }) => (
-                        <div
-                          key={day}
-                          className={`flex justify-between items-center text-sm ${
-                            short
-                              ? "text-muted-foreground/70"
-                              : "text-foreground"
-                          }`}
-                        >
-                          <span
-                            className={short ? "font-normal" : "font-medium"}
-                          >
-                            {day}
-                          </span>
-                          <span
-                            className={`tabular-nums ${
+                    <div className="space-y-2">
+                      {workingHours.map(({ day, hours, note, short }) => (
+                        <div key={day}>
+                          <div
+                            className={`flex justify-between items-center text-sm ${
                               short
-                                ? "text-muted-foreground"
-                                : "font-semibold text-primary-blue"
+                                ? "text-muted-foreground/70"
+                                : "text-foreground"
                             }`}
                           >
-                            {hours}
-                          </span>
+                            <span
+                              className={short ? "font-normal" : "font-medium"}
+                            >
+                              {day}
+                            </span>
+                            <span
+                              className={`tabular-nums ${
+                                short
+                                  ? "text-muted-foreground"
+                                  : "font-semibold text-primary-blue"
+                              }`}
+                            >
+                              {hours}
+                            </span>
+                          </div>
+                          {note && (
+                            <p className="text-xs text-amber-600 italic mt-0.5">
+                              * {note}
+                            </p>
+                          )}
                         </div>
                       ))}
                     </div>
@@ -157,7 +168,7 @@ export function Contact() {
           {/* Map */}
           <div className="bg-white rounded-2xl overflow-hidden shadow-card h-96 lg:h-full min-h-80">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3797.3!2d79.1288!3d18.4386!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bccd9e3850b7e11%3A0x15f269fbbec2a032!2sSMart%20Dental%20(%20Root%20Canal%20Clinic%20)!5e0!3m2!1sen!2sin!4v1700000000000"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3797.2658428299354!2d79.12660897499558!3d18.438600082610133!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bccd9e3850b7e11%3A0x15f269fbbec2a032!2sSMart%20Dental%20(%20Root%20Canal%20Clinic%20)!5e0!3m2!1sen!2sin!4v1742600000000!5m2!1sen!2sin"
               width="100%"
               height="100%"
               style={{ border: 0, minHeight: "320px" }}
