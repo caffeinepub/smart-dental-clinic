@@ -146,8 +146,11 @@ export function Footer() {
                 </a>
               </div>
               <div className="flex items-start gap-2 text-white/70">
-                <span>🕐</span>
-                <span>Mon–Sat: 9:00 AM – 8:00 PM</span>
+                <span className="mt-0.5">🕐</span>
+                <div className="leading-relaxed">
+                  <div>Mon–Sat: 10 am – 9 pm</div>
+                  <div className="text-white/50">Sun: 10 am – 2 pm</div>
+                </div>
               </div>
               <a
                 href="https://wa.me/918790021647"
