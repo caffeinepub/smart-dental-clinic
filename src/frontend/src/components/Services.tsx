@@ -1,5 +1,33 @@
 import { useEffect, useRef } from "react";
 
+const serviceColors = [
+  {
+    bg: "oklch(0.94 0.05 230)",
+    icon: "oklch(0.55 0.12 230)",
+    hover: "oklch(0.55 0.12 230)",
+  },
+  {
+    bg: "oklch(0.94 0.05 175)",
+    icon: "oklch(0.65 0.14 175)",
+    hover: "oklch(0.65 0.14 175)",
+  },
+  {
+    bg: "oklch(0.94 0.06 35)",
+    icon: "oklch(0.62 0.16 35)",
+    hover: "oklch(0.62 0.16 35)",
+  },
+  {
+    bg: "oklch(0.94 0.05 290)",
+    icon: "oklch(0.55 0.16 290)",
+    hover: "oklch(0.55 0.16 290)",
+  },
+  {
+    bg: "oklch(0.94 0.05 155)",
+    icon: "oklch(0.58 0.15 155)",
+    hover: "oklch(0.58 0.15 155)",
+  },
+];
+
 const services = [
   {
     icon: "✨",
@@ -118,14 +146,25 @@ export function Services() {
   }, []);
 
   return (
-    <section id="services" className="py-24 bg-white" ref={sectionRef}>
+    <section
+      id="services"
+      className="py-24 relative"
+      ref={sectionRef}
+      style={{
+        background:
+          "repeating-linear-gradient(135deg, white 0px, white 40px, oklch(0.97 0.02 220) 40px, oklch(0.97 0.02 220) 41px)",
+      }}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16 animate-fade-up">
-          <span className="text-sm font-semibold text-mint uppercase tracking-widest">
+          <span
+            className="text-sm font-semibold uppercase tracking-widest"
+            style={{ color: "oklch(0.72 0.18 35)" }}
+          >
             What We Offer
           </span>
-          <h2 className="font-display text-4xl font-bold text-foreground mt-2 mb-4">
-            Our Dental <span className="text-primary-blue">Services</span>
+          <h2 className="font-display text-4xl font-bold mt-2 mb-4">
+            Our Dental <span className="text-gradient">Services</span>
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
             Comprehensive care for your entire family under one roof
@@ -133,24 +172,64 @@ export function Services() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-          {services.map((service, idx) => (
-            <div
-              key={service.name}
-              className="animate-fade-up bg-white rounded-2xl border border-border p-6 service-card-hover cursor-pointer group"
-              style={{ transitionDelay: `${idx * 40}ms` }}
-              data-ocid={`services.item.${idx + 1}`}
-            >
-              <div className="service-icon w-12 h-12 rounded-xl bg-primary/8 flex items-center justify-center text-2xl mb-4 transition-all duration-250">
-                {service.icon}
+          {services.map((service, idx) => {
+            const color = serviceColors[idx % serviceColors.length];
+            return (
+              <div
+                key={service.name}
+                className="animate-fade-up bg-white rounded-2xl border border-border/60 p-6 service-card-hover cursor-pointer group relative overflow-hidden"
+                style={{
+                  transitionDelay: `${idx * 40}ms`,
+                  transition:
+                    "transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease",
+                }}
+                onMouseEnter={(e) => {
+                  const el = e.currentTarget as HTMLElement;
+                  el.style.boxShadow = `0 10px 30px ${color.hover}40`;
+                  el.style.borderColor = `${color.hover}60`;
+                  el.style.transform = "translateY(-5px)";
+                }}
+                onMouseLeave={(e) => {
+                  const el = e.currentTarget as HTMLElement;
+                  el.style.boxShadow = "";
+                  el.style.borderColor = "";
+                  el.style.transform = "";
+                }}
+                data-ocid={`services.item.${idx + 1}`}
+              >
+                {/* Top color accent bar */}
+                <div
+                  className="absolute top-0 left-0 right-0 h-1 rounded-t-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  style={{
+                    background: `linear-gradient(90deg, ${color.icon}, ${color.bg})`,
+                  }}
+                />
+                <div
+                  className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl mb-4 transition-all duration-300"
+                  style={{ background: color.bg }}
+                >
+                  <span className="group-hover:animate-bounce-gentle inline-block">
+                    {service.icon}
+                  </span>
+                </div>
+                <h3
+                  className="font-semibold text-foreground text-base mb-1.5 transition-colors duration-200"
+                  style={{} as React.CSSProperties}
+                  onMouseEnter={(e) => {
+                    (e.currentTarget as HTMLElement).style.color = color.icon;
+                  }}
+                  onMouseLeave={(e) => {
+                    (e.currentTarget as HTMLElement).style.color = "";
+                  }}
+                >
+                  {service.name}
+                </h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  {service.desc}
+                </p>
               </div>
-              <h3 className="font-semibold text-foreground text-base mb-1.5 group-hover:text-primary-blue transition-colors">
-                {service.name}
-              </h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                {service.desc}
-              </p>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

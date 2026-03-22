@@ -16,8 +16,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ['Plus Jakarta Sans', 'sans-serif'],
-        display: ['Bricolage Grotesque', 'sans-serif'],
+        sans: ["Plus Jakarta Sans", "sans-serif"],
+        display: ["Bricolage Grotesque", "sans-serif"],
       },
       colors: {
         border: "oklch(var(--border))",
@@ -53,6 +53,22 @@ export default {
           DEFAULT: "oklch(var(--card))",
           foreground: "oklch(var(--card-foreground))",
         },
+        coral: {
+          DEFAULT: "oklch(var(--coral) / <alpha-value>)",
+          light: "oklch(var(--coral-light))",
+        },
+        violet: {
+          DEFAULT: "oklch(var(--violet) / <alpha-value>)",
+          light: "oklch(var(--violet-light))",
+        },
+        pink: {
+          DEFAULT: "oklch(var(--pink) / <alpha-value>)",
+          light: "oklch(var(--pink-light))",
+        },
+        emerald: {
+          DEFAULT: "oklch(var(--emerald) / <alpha-value>)",
+          light: "oklch(var(--emerald-light))",
+        },
         chart: {
           1: "oklch(var(--chart-1))",
           2: "oklch(var(--chart-2))",
@@ -85,6 +101,10 @@ export default {
         "card-hover": "0 12px 40px rgba(46, 134, 193, 0.18)",
         mint: "0 8px 24px rgba(72, 201, 176, 0.25)",
         blue: "0 8px 24px rgba(46, 134, 193, 0.3)",
+        coral: "0 8px 24px rgba(230, 130, 80, 0.3)",
+        violet: "0 8px 24px rgba(140, 80, 220, 0.3)",
+        pink: "0 8px 24px rgba(220, 80, 150, 0.3)",
+        emerald: "0 8px 24px rgba(60, 180, 120, 0.3)",
       },
       keyframes: {
         "accordion-down": {
